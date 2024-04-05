@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Pets Friends</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tac+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            background-color: #edfffe;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #333;
+        }
+        .question {
+            font-size: 22px;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .options {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .option {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            background-color: #f7f7f7;
+        }
+        .option:hover {
+            background-color: #e7e7e7;
+        }
+        .option input {
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Know Your <span id="petName"></span></h1>
+    <div class="question">Is there any suitable place near you? (For <span id="petName"></span> to socialize or play around)</div>
+    <div class="options">
+        <label class="option">
+            <input type="radio" name="suitablePlace" value="yes">YES
+        </label>
+        <label class="option">
+            <input type="radio" name="suitablePlace" value="no">NO
+        </label>
+        <label class="option">
+            <input type="radio" name="suitablePlace" value="uncertain">UNCERTAIN
+        </label>
+    </div>
+    <button id="submitQuiz">SUBMIT</button>
+    <script>
+        var petName = localStorage.getItem('petName');
+        document.getElementById('petName').textContent = petName;
+    </script>
+    <script>
+        document.getElementById('submitQuiz').addEventListener('click', function() {
+            var suitablePlaceRadios = document.querySelectorAll('input[name="suitablePlace"]');
+            var suitablePlaceChecked = [...suitablePlaceRadios].find(radio => radio.checked);
+            if (suitablePlaceChecked) {
+                var suitablePlace = suitablePlaceChecked.value;
+               
+                localStorage.setItem('suitablePlace', suitablePlace);
+                window.location.href = 'Q5.html'; // 
+            } 
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var savedSuitablePlace = localStorage.getItem('suitablePlace');
+            if (savedSuitablePlace) {
+                var radioToCheck = document.querySelector(`input[name="suitablePlace"][value="${savedSuitablePlace}"]`);
+                if (radioToCheck) {
+                    radioToCheck.checked = true;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

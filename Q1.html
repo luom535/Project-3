@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Pets Friends</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tac+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            background-color: rgb(178, 217, 230);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            color: white;
+            margin-bottom: 30px;
+            font-family: 'Tac One', sans-serif;
+        }
+        #quizForm {
+            background: rgb(255, 249, 220);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+        #quizForm p {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        #quizForm label {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        #quizForm input[type="radio"] {
+            margin-right: 10px;
+        }
+        #submitQuiz {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #submitQuiz:hover {
+            background-color: #0056b3;
+        }
+        .custom-input {
+            display: none; 
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>PETS</h1>
+    <form id="quizForm">
+        <p>What kind of pet do you have?</p>
+        <label for="dog"><input type="radio" id="dog" name="petType" value="dog">DOGS</label>
+        <label for="cat"><input type="radio" id="cat" name="petType" value="cat">CATS</label>
+        <label for="hamster"><input type="radio" id="hamster" name="petType" value="hamster">HAMSTERS</label>
+        <label for="parrot"><input type="radio" id="parrot" name="petType" value="parrot">PARROTS</label>
+        <label for="insect"><input type="radio" id="insect" name="petType" value="insect">INSECTS</label>
+        <label for="bunny"><input type="radio" id="bunny" name="petType" value="bunny">BUNNIES</label>
+        <label for="amphibian"><input type="radio" id="amphibian" name="petType" value="amphibian">AMPHIBIANS</label>
+        <label for="else"><input type="radio" id="else" name="petType" value="else">ELSE</label>
+        <input type="text" id="customPetType" class="custom-input" name="customPetType" placeholder="Please specify">
+        <button type="button" id="submitQuiz">SUBMIT</button>
+    </form>
+    <script>
+        var elseRadioButton = document.getElementById('else');
+        var customInput = document.getElementById('customPetType');
+        var submitButton = document.getElementById('submitQuiz');
+
+        elseRadioButton.addEventListener('change', function() {
+            customInput.style.display = elseRadioButton.checked ? 'block' : 'none';
+        });
+
+        submitButton.addEventListener('click', function() {
+            var selectedPetType = document.querySelector('input[name="petType"]:checked').value;
+            if (selectedPetType === 'else') {
+                var customPetType = customInput.value;
+                localStorage.setItem('petType', customPetType);
+            } else {
+                localStorage.setItem('petType', selectedPetType);
+            }
+            var petType = localStorage.getItem('petType');
+            var petTypeElement = document.createElement('p');
+            petTypeElement.textContent = 'Wow, you have a ' + petType + '!';
+            document.body.appendChild(petTypeElement);
+            var continueButton = document.createElement('button');
+            continueButton.textContent = 'Continue';
+            continueButton.addEventListener('click', function() {
+                window.location.href = 'Q2.html';
+            });
+            document.body.appendChild(continueButton);
+        });
+    </script>
+    </script>
+</body>
+</html>

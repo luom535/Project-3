@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Pet Friends Quiz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tac+One&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Pacifico', sans-serif;
+            text-align: center;
+            background-color: #fbfce3;
+        }
+        .rotated {
+            transform: rotate(180deg);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            backdrop-filter: blur(8px);
+        }
+        .background-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            backdrop-filter: blur(6px);
+        }
+        .content {
+            min-height: calc(100vh - 700px); 
+            padding-top: 350px; 
+            padding-bottom: 350px; 
+            position: relative; 
+            z-index: 2;
+        }
+        .title {
+            background-color: #7ed2fcd2; 
+            color: #ffffff; 
+            font-size: 55px;
+            padding: 25px; 
+            display: inline-block; 
+            border-radius: 30px; 
+            box-shadow: 3px 3px 5px rgba(0,0,0,0.3); 
+            margin-top: 90px;
+        }
+        .question {
+            margin-top: 50px; 
+            font-size: 48px; 
+            color: #85bdd0; 
+        }
+    </style>
+</head>
+<body>
+    <img src="https://cdn.glitch.global/25dea598-19f8-4db8-9cfb-a4fe0cc96f0a/%E6%9C%AA%E5%91%BD%E5%90%8D%E4%BD%9C%E5%93%81%206.png" class="rotated" alt="Rotated Top Image">
+    <div class="content">
+        <div class="title">Pet Friends</div>
+        <div id="finalMessage" class="question"></div>
+    </div>
+    <img src="https://cdn.glitch.global/25dea598-19f8-4db8-9cfb-a4fe0cc96f0a/%E6%9C%AA%E5%91%BD%E5%90%8D%E4%BD%9C%E5%93%81%206.png" class="background-bottom" alt="Bottom Image">
+
+    <script>
+        var petName = localStorage.getItem('petName') || 'your pet'; 
+        document.getElementById('finalMessage').innerHTML = `We hope you and ${petName} can find friends here!`;
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Pets Friends</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tac+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            background-color: #edfffe;
+            margin: 0;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            color: #333;
+        }
+        .question {
+            font-size: 26px;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .options {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .option {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            background-color: #f7f7f7;
+        }
+        .option:hover {
+            background-color: #e7e7e7;
+        }
+        .option input {
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Know Your <span id="petName"></span></h1>
+    <div class="question">Does she/he need friends?</div>
+    <div class="options">
+        <label class="option">
+            <input type="radio" name="petFriends" value="yes">YES
+        </label>
+        <label class="option">
+            <input type="radio" name="petFriends" value="no">NO
+        </label>
+    </div>
+    <button id="submitQuiz">SUBMIT</button>
+    <script>
+        var petName = localStorage.getItem('petName');
+        document.getElementById('petName').textContent = petName;
+    </script>
+    <script>
+        document.getElementById('submitQuiz').addEventListener('click', function() {
+            var petFriendsRadios = document.querySelectorAll('input[name="petFriends"]');
+            var petFriendsChecked = [...petFriendsRadios].find(radio => radio.checked);
+            if (petFriendsChecked) {
+           
+                var petFriends = petFriendsChecked.value;
+                
+     
+                localStorage.setItem('petFriends', petFriends);
+
+                window.location.href = 'Q6.html'; 
+            } 
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var savedPetFriends = localStorage.getItem('petFriends');
+            if (savedPetFriends) {
+                var radioToCheck = document.querySelector(`input[name="petFriends"][value="${savedPetFriends}"]`);
+                if (radioToCheck) {
+                    radioToCheck.checked = true;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
